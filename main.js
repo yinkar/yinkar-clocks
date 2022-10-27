@@ -12,7 +12,7 @@ const getY = (expr, factor) => Math.sin(expr * 2 * Math.PI - (Math.PI / 2)) * si
 const drawHand = (ctx, expr, length) => {
     ctx.beginPath();
     ctx.moveTo(offsetX + size, offsetY + size);
-    ctx.lineTo(offsetX + getX(expr, length), offsetY + getY(expr, 0.5));
+    ctx.lineTo(offsetX + getX(expr, length), offsetY + getY(expr, length));
     ctx.stroke();
 }
 
