@@ -9,6 +9,13 @@ const size = 100;
 const getX = (expr, factor) => Math.cos(expr * 2 * Math.PI - (Math.PI / 2)) * size * factor + size;
 const getY = (expr, factor) => Math.sin(expr * 2 * Math.PI - (Math.PI / 2)) * size * factor + size;
 
+const drawHand = (ctx, expr, length) => {
+    ctx.beginPath();
+    ctx.moveTo(offsetX + size, offsetY + size);
+    ctx.lineTo(offsetX + getX(expr, length), offsetY + getY(expr, 0.5));
+    ctx.stroke();
+}
+
 ctx.font = '12px sans-serif';
 
 const draw = () => {
@@ -26,20 +33,9 @@ const draw = () => {
   const m = (new Date()).getMinutes();
   const s = (new Date()).getSeconds();
 
-  ctx.beginPath();
-  ctx.moveTo(offsetX + size, offsetY + size);
-  ctx.lineTo(offsetX + getX(h / 12, 0.5), offsetY + getY(h / 12, 0.5));
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(offsetX + size, offsetY + size);
-  ctx.lineTo(offsetX + getX(m / 60, 0.7), offsetY + getY(m / 60, 0.7));
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(offsetX + size, offsetY + size);
-  ctx.lineTo(offsetX + getX(s / 60, 0.9), offsetY + getY(s / 60, 0.9));
-  ctx.stroke();
+  drawHand(ctx, h / 12, 0.5);
+  drawHand(ctx, m / 60, 0.7);
+  drawHand(ctx, s / 60, 0.9);
   
   requestAnimationFrame(draw);
 }
