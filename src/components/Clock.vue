@@ -53,6 +53,9 @@ onMounted(() => {
                 ];
 
                 draw();
+            })
+            .catch(() => {
+                updateTime();
             });
     };
 
