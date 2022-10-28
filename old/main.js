@@ -7,8 +7,6 @@ const clock = (selector, timezone = 'Europe/Istanbul') => {
   const offsetY = 50;
   const size = 100;
 
-  const fps = 1;
-
   const ONE_SECOND = 1000;
   const ONE_MINUTE = ONE_SECOND * 60;
   const ONE_HOUR = ONE_MINUTE * 60;
@@ -28,8 +26,6 @@ const clock = (selector, timezone = 'Europe/Istanbul') => {
       ctx.lineTo(offsetX + getX(expr, length), offsetY + getY(expr, length));
       ctx.stroke();
   }
-
-  let date = null;
 
   let [ h, m, s ] = [ 0, 0, 0 ];
 
@@ -75,7 +71,7 @@ const clock = (selector, timezone = 'Europe/Istanbul') => {
   fetch(`https://worldtimeapi.org/api/timezone/${timezone}`)
     .then(r => r.json())
     .then(d => {
-      currentTime = d.datetime;
+      const currentTime = d.datetime;
 
       [ h, m, s ] = [ 
         parseInt(currentTime.replace(timeRegex, '$1')) % 24, 
