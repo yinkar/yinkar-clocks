@@ -22,7 +22,7 @@ onMounted(() => {
     const ONE_MINUTE = ONE_SECOND * 60;
     const ONE_HOUR = ONE_MINUTE * 60;
 
-    const cityName = timezone.split('/').at(-1);
+    const cityName = timezone.split('/').at(-1).replace('_', ' ');
 
     const getDim = (trigFunc, expr, factor) => trigFunc(
         expr * 2 * Math.PI - (Math.PI / 2)
@@ -89,13 +89,13 @@ onMounted(() => {
         ctx.font = 'bold 18px monospace';
         ctx.textBaseline = 'top';
 
-        const pad = val => val.toString().padStart(2, 0);
+        const pad = val => parseInt(val).toString().padStart(2, 0);
 
         const digitalTime = `${pad(h)}:${pad(m)}:${pad(s)}`;
 
         ctx.fillText(digitalTime, offsetX + size, offsetY - 35);
 
-        ctx.font = 'normal 25px monospace';
+        ctx.font = 'normal 25px sans-serif';
 
         ctx.fillText(cityName, offsetX + size, offsetY + size * 2 + 12);
 
@@ -106,9 +106,12 @@ onMounted(() => {
 
     const timeRegex = /.*T([0-9]{2}):([0-9]{2}):([0-9]{2})\..*/g;
 
-    setInterval(() => s = (s + 1) % 60, ONE_SECOND);
-    setInterval(() => m = (m + 1) % 60, ONE_MINUTE);
-    setInterval(() => h = (h + 1) % 24, ONE_HOUR);
+    setInterval(() => {
+        s = (s + 1) % 60;
+        
+        m = m + 2 * Math.PI / 12 / 5; 
+        h = h + 2 * Math.PI / 12 / 5 / 60; 
+    }, ONE_SECOND);
 
     setInterval(() => updateTime(), ONE_MINUTE);
 });
