@@ -13,6 +13,9 @@ const {
     size: Number,
 });
 
+const width = ref(300);
+const height = ref(300);
+
 const canvas = ref(null);
 
 let loaded = ref(false);
@@ -50,7 +53,7 @@ onMounted(() => {
     };
 
     const draw = (ctx) => {
-        ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+        ctx.clearRect(0, 0, width.value, height.value);
 
         ctx.shadowBlur = 2;
         ctx.shadowColor = 'rgba(0, 0, 0, .6)';
@@ -84,10 +87,10 @@ onMounted(() => {
             ctx.fillText(
                 i, 
                 offsetX + Math.cos(
-                    i/12 * 2 * Math.PI - (Math.PI / 2)
+                    i / 12 * 2 * Math.PI - (Math.PI / 2)
                 ) * size * 0.75 + size,
                 offsetY + Math.sin(
-                    i/12 * 2 * Math.PI - (Math.PI / 2)
+                    i / 12 * 2 * Math.PI - (Math.PI / 2)
                 ) * size * 0.75 + size + 2
             );
         }
@@ -122,14 +125,14 @@ onMounted(() => {
         ctx.shadowColor = 'rgba(255, 200, 0, .6)';
 
         ctx.translate(offsetX + size, offsetY + size);
-        ctx.rotate((Math.PI * 2 / 60) * (h % 12) * 5 - Math.PI / 2);
+        ctx.rotate((Math.PI * 2 / 60) * ((h % 12) * 5 + ((Math.PI * 2 / 60) * (m + s / 60))) - Math.PI / 2);
         ctx.fillStyle = '#111';
         ctx.beginPath();
-        ctx.rect(-5, -5, 46, 10);
+        ctx.rect(-5, -5, 40, 10);
         ctx.fill();
         ctx.stroke();
 
-        ctx.translate(60, -8);
+        ctx.translate(50, -8);
         ctx.rotate(Math.PI / 2);
         ctx.beginPath();
         ctx.moveTo(8, 0);
@@ -147,14 +150,14 @@ onMounted(() => {
 
         ctx.resetTransform();
         ctx.translate(offsetX + size, offsetY + size);
-        ctx.rotate((Math.PI * 2 / 60) * m - Math.PI / 2);
+        ctx.rotate((Math.PI * 2 / 60) * (m + s / 60) - Math.PI / 2);
         ctx.fillStyle = '#111';
         ctx.beginPath();
-        ctx.rect(-4, -4, 60, 8);
+        ctx.rect(-4, -4, 55, 8);
         ctx.fill();
         ctx.stroke();
 
-        ctx.translate(70, -6);
+        ctx.translate(65, -6);
         ctx.rotate(Math.PI / 2);
         ctx.beginPath();
         ctx.moveTo(6, 0);
@@ -175,11 +178,11 @@ onMounted(() => {
         ctx.rotate((Math.PI * 2 / 60) * s - Math.PI / 2);
         ctx.fillStyle = '#111';
         ctx.beginPath();
-        ctx.rect(-3, -3, 75, 6);
+        ctx.rect(-3, -3, 65, 6);
         ctx.fill();
         ctx.stroke();
 
-        ctx.translate(80, -5);
+        ctx.translate(70, -5);
         ctx.rotate(Math.PI / 2);
         ctx.beginPath();
         ctx.moveTo(5, 0);
@@ -218,9 +221,14 @@ onMounted(() => {
 
     setInterval(() => {
         s = (s + 1) % 60;
-        
-        m = m + 2 * Math.PI / 12 / 5; 
-        h = h + 2 * Math.PI / 12 / 5 / 60; 
+
+        if (parseInt(s) === 0) {
+            m = (m + 1) % 60;
+
+            if (parseInt(m) === 0) {
+                h = (h + 1) % 12;
+            }
+        }
     }, ONE_SECOND);
 
     setInterval(() => updateTime(), ONE_MINUTE);
@@ -229,7 +237,7 @@ onMounted(() => {
 
 <template>
     <div class="clock">
-        <canvas id="canvas" width="300" height="300" ref="canvas"></canvas>
+        <canvas id="canvas" :width="width" :height="height" ref="canvas"></canvas>
         <div class="preloader" v-if="!loaded"></div>
     </div>
 </template>
