@@ -236,7 +236,7 @@ onMounted(() => {
         ctx.shadowOffsetY = 4;
 
         ctx.fillStyle = '#ccc';
-        ctx.font = 'bold 25px "Great Vibes", sans-serif';
+        ctx.font = 'normal 25px "Great Vibes", sans-serif';
         ctx.fillText(cityName, offsetX + size, offsetY + size * 2 + 12);
 
         ctx.shadowOffsetX = 0;
