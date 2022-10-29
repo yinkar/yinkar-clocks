@@ -8,6 +8,3 @@ import Clock from './components/Clock.vue';
   <Clock timezone="Europe/London" />
   <Clock timezone="America/New_York" />
 </template>
-
-<style scoped>
-</style>
