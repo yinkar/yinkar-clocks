@@ -55,6 +55,19 @@ onMounted(() => {
     const draw = (ctx) => {
         ctx.clearRect(0, 0, width.value, height.value);
 
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+        ctx.shadowOffsetX = 4;
+        ctx.shadowOffsetY = 4;
+        
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(0, 0, 0, .4)'
+        ctx.arc(offsetX + size, offsetY + size, size, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+
         ctx.shadowBlur = 2;
         ctx.shadowColor = 'rgba(0, 0, 0, .6)';
         ctx.fillStyle = (() => {
@@ -81,7 +94,7 @@ onMounted(() => {
         ctx.textBaseline = 'middle';
 
         ctx.shadowBlur = 3;
-        ctx.shadowColor = 'rgba(200, 50, 200, 1)';
+        ctx.shadowColor = 'rgba(120, 50, 200, 1)';
 
         for (let i = 1; i <= 12; i++) {
             ctx.fillText(
@@ -111,13 +124,22 @@ onMounted(() => {
         ctx.arc(offsetX + size, offsetY + size, size - 10, 0, Math.PI * 2);
         ctx.stroke();
 
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+        ctx.shadowOffsetX = 4;
+        ctx.shadowOffsetY = 4;
+
         ctx.font = 'normal 18px "Syne Mono", sans-serif';
         ctx.textBaseline = 'top';
         ctx.fillStyle = '#ddd';
+        
         const pad = val => parseInt(val).toString().padStart(2, 0);
         const digitalTime = `${pad(h)}:${pad(m)}:${pad(s)}`;
 
         ctx.fillText(digitalTime, offsetX + size, offsetY - 26);
+        
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
 
         ctx.strokeStyle = 'rgba(255, 255, 255, .9)';
 
@@ -197,20 +219,48 @@ onMounted(() => {
 
         ctx.resetTransform();
 
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 5;
         ctx.shadowColor = 'rgba(200, 200, 200, 0.6)';
 
-        ctx.fillStyle = '#111';
+        ctx.fillStyle = '#222';
         ctx.beginPath();
         ctx.arc(offsetX + size, offsetY + size, 10, 0, Math.PI * 2);
         ctx.fill();
         ctx.stroke();
 
-        ctx.shadowColor = 'transparent';     
+        ctx.shadowColor = 'transparent';
+
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+        ctx.shadowOffsetX = 4;
+        ctx.shadowOffsetY = 4;
 
         ctx.fillStyle = '#ccc';
         ctx.font = 'bold 25px "Great Vibes", sans-serif';
         ctx.fillText(cityName, offsetX + size, offsetY + size * 2 + 12);
+
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+
+        ctx.beginPath();
+        ctx.arc(offsetX + size, offsetY + size, size - 12, 0, Math.PI * 2);
+        ctx.clip();
+
+        ctx.translate(offsetX + size * 2.9, offsetY + size * 0.2);
+        ctx.rotate((Math.PI * 2) / 2.3);
+        ctx.fillStyle = (() => {
+        const grd = ctx.createLinearGradient(0, 0, 0, size);
+                grd.addColorStop(0, 'rgba(255, 255, 255, .15)');
+                grd.addColorStop(0.4, 'rgba(255, 255, 255, .1)');
+                grd.addColorStop(0.9, 'rgba(255, 255, 255, .05)');
+                grd.addColorStop(1, 'rgba(255, 255, 255, .01)');
+                return grd;
+            })();
+        ctx.beginPath();
+        ctx.rect(0, 0, size * 4, 200);
+        ctx.fill();
+
+        ctx.resetTransform();
 
         requestAnimationFrame(() => draw(ctx));
     }
