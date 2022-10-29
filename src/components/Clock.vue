@@ -197,7 +197,7 @@ onMounted(() => {
         ctx.shadowBlur = 10;
         ctx.shadowColor = 'rgba(200, 200, 200, 0.6)';
 
-        ctx.fillStyle = '#ccc';
+        ctx.fillStyle = '#111';
         ctx.beginPath();
         ctx.arc(offsetX + size, offsetY + size, 10, 0, Math.PI * 2);
         ctx.fill();
@@ -206,7 +206,6 @@ onMounted(() => {
         ctx.shadowColor = 'transparent';     
 
         ctx.font = 'bold 25px "Great Vibes", sans-serif';
-
         ctx.fillText(cityName, offsetX + size, offsetY + size * 2 + 12);
 
         requestAnimationFrame(() => draw(ctx));
