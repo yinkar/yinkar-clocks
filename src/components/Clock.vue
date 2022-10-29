@@ -296,6 +296,7 @@ onMounted(() => {
 .clock {
     position: relative;
     display: inline-block;
+    margin-bottom: 50px;
 }
 
 #canvas {
