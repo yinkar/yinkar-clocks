@@ -8,3 +8,13 @@ body {
     margin: 20px auto;
     background-color: #222;
 }
+
+@font-face {
+    font-family: 'Syne Mono';
+    src: url('./fonts/Syne_Mono/SyneMono-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Great Vibes';
+    src: url('./fonts/Great_Vibes/GreatVibes-Regular.ttf');
+}

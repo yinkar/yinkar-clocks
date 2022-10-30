@@ -89,7 +89,7 @@ onMounted(() => {
 
 
         ctx.fillStyle = '#fff';
-        ctx.font = '16px "Syne Mono", sans-serif';
+        ctx.font = '16px "Syne Mono", monospace';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
@@ -129,7 +129,7 @@ onMounted(() => {
         ctx.shadowOffsetX = 4;
         ctx.shadowOffsetY = 4;
 
-        ctx.font = 'normal 18px "Syne Mono", sans-serif';
+        ctx.font = 'normal 18px "Syne Mono", monospace';
         ctx.textBaseline = 'top';
         ctx.fillStyle = '#ddd';
         
@@ -265,7 +265,13 @@ onMounted(() => {
         requestAnimationFrame(() => draw(ctx));
     }
 
-    updateTime();
+    const checkFontInterval = setInterval(() => {
+        if (document.fonts.check('20px Great Vibes')) {
+            updateTime();
+            clearInterval(checkFontInterval);
+        }
+    }, 100);
+
 
     const timeRegex = /.*T([0-9]{2}):([0-9]{2}):([0-9]{2})\..*/g;
 
@@ -311,7 +317,7 @@ onMounted(() => {
 }
 
 .preloader::after {
-    font-family: 'Syne Mono', sans-serif;
+    font-family: 'Syne Mono', monospace;
     position: absolute;
     left: 0;
     top: 150px;
