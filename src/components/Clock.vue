@@ -147,7 +147,7 @@ onMounted(() => {
         ctx.shadowColor = 'rgba(255, 200, 0, .6)';
 
         ctx.translate(offsetX + size, offsetY + size);
-        ctx.rotate((Math.PI * 2 / 60) * ((h % 12) * 5 + ((Math.PI * 2 / 60) * (m + s / 60))) - Math.PI / 2);
+        ctx.rotate((Math.PI * 2 / 60) * ((h % 12) * 5 + ((Math.PI * 2 / 60) * (m + s / 60) * 0.8)) - Math.PI / 2);
         ctx.fillStyle = '#111';
         ctx.beginPath();
         ctx.rect(-5, -5, 40, 10);
