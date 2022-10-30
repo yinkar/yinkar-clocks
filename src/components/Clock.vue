@@ -200,19 +200,16 @@ onMounted(() => {
         ctx.rotate((Math.PI * 2 / 60) * s - Math.PI / 2);
         ctx.fillStyle = '#111';
         ctx.beginPath();
-        ctx.rect(-3, -3, 65, 6);
-        ctx.fill();
-        ctx.stroke();
+        ctx.rect(-3, -3, 60, 6);
 
-        ctx.translate(70, -5);
-        ctx.rotate(Math.PI / 2);
         ctx.beginPath();
-        ctx.moveTo(5, 0);
-        ctx.lineTo(0, 12);
-        ctx.lineTo(5, 15);
-        ctx.lineTo(10, 12);
-        ctx.closePath();
-        ctx.fill();
+        ctx.moveTo(-3, -3);
+        ctx.lineTo(55, -3);
+        ctx.lineTo(61, -5);
+        ctx.lineTo(70, 0);
+        ctx.lineTo(61, 5);
+        ctx.lineTo(55, 3);
+        ctx.lineTo(-3, 3);
         ctx.stroke();
 
         ctx.shadowColor = 'transparent';
@@ -253,8 +250,8 @@ onMounted(() => {
         ctx.fillStyle = (() => {
         const grd = ctx.createLinearGradient(0, 0, 0, size);
                 grd.addColorStop(0, 'rgba(255, 255, 255, .15)');
-                grd.addColorStop(0.4, 'rgba(255, 255, 255, .1)');
-                grd.addColorStop(0.9, 'rgba(255, 255, 255, .03)');
+                grd.addColorStop(0.4, 'rgba(255, 255, 255, .05)');
+                grd.addColorStop(0.9, 'rgba(255, 255, 255, .02)');
                 grd.addColorStop(1, 'rgba(255, 255, 255, .01)');
                 return grd;
             })();
