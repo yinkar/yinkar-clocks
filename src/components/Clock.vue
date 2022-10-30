@@ -175,16 +175,16 @@ onMounted(() => {
         ctx.rotate((Math.PI * 2 / 60) * (m + s / 60) - Math.PI / 2);
         ctx.fillStyle = '#111';
         ctx.beginPath();
-        ctx.rect(-4, -4, 55, 8);
+        ctx.rect(-4, -4, 45, 8);
         ctx.fill();
         ctx.stroke();
 
-        ctx.translate(65, -6);
+        ctx.translate(55, -6);
         ctx.rotate(Math.PI / 2);
         ctx.beginPath();
         ctx.moveTo(6, 0);
         ctx.lineTo(0, 16);
-        ctx.lineTo(6, 18);
+        ctx.lineTo(6, 20);
         ctx.lineTo(12, 16);
         ctx.closePath();
         ctx.fill();
@@ -252,7 +252,7 @@ onMounted(() => {
         const grd = ctx.createLinearGradient(0, 0, 0, size);
                 grd.addColorStop(0, 'rgba(255, 255, 255, .15)');
                 grd.addColorStop(0.4, 'rgba(255, 255, 255, .1)');
-                grd.addColorStop(0.9, 'rgba(255, 255, 255, .05)');
+                grd.addColorStop(0.9, 'rgba(255, 255, 255, .03)');
                 grd.addColorStop(1, 'rgba(255, 255, 255, .01)');
                 return grd;
             })();
