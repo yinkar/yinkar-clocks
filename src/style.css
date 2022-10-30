@@ -18,3 +18,8 @@ body {
     font-family: 'Great Vibes';
     src: url('./fonts/Great_Vibes/GreatVibes-Regular.ttf');
 }
+
+@font-face {
+    font-family: 'Stick No Bills';
+    src: url('./fonts/Stick_No_Bills/StickNoBills-Regular.ttf');
+}

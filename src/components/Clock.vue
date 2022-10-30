@@ -107,6 +107,18 @@ onMounted(() => {
                 ) * size * 0.75 + size + 2
             );
         }
+        
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+
+        ctx.fillStyle = 'rgb(100, 100, 100, 0.5)';
+        ctx.font = 'normal 15px "Stick No Bills", sans-serif';
+        ctx.fillText('Yinkar', offsetX + size, offsetY + size + size / 2.5);
+
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
 
         ctx.shadowColor = 'transparent';
 
