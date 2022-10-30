@@ -248,18 +248,17 @@ onMounted(() => {
         ctx.arc(offsetX + size, offsetY + size, size - 20, 0, Math.PI * 2);
         ctx.clip();
 
-        ctx.translate(offsetX + size * 2.4, offsetY + size * 0.2);
-        ctx.rotate((Math.PI * 2) / 2.3);
+        ctx.translate(offsetX, offsetY);
         ctx.fillStyle = (() => {
-        const grd = ctx.createLinearGradient(0, 0, 0, size);
-                grd.addColorStop(0, 'rgba(255, 255, 255, .15)');
-                grd.addColorStop(0.4, 'rgba(255, 255, 255, .05)');
-                grd.addColorStop(0.9, 'rgba(255, 255, 255, .02)');
-                grd.addColorStop(1, 'rgba(255, 255, 255, .01)');
+        const grd = ctx.createLinearGradient(0, 0, size, size * 1.8);
+                grd.addColorStop(0, 'rgba(255, 255, 255, .02)');
+                grd.addColorStop(0.4, 'rgba(255, 255, 255, .04)');
+                grd.addColorStop(0.9, 'rgba(255, 255, 255, .1)');
+                grd.addColorStop(1, 'rgba(255, 255, 255, .2)');
                 return grd;
             })();
         ctx.beginPath();
-        ctx.rect(0, 0, size * 4, 200);
+        ctx.ellipse(0, 0, size * 1.2, 200, -Math.PI / 2, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.restore();
