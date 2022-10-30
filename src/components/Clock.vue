@@ -31,7 +31,7 @@ onMounted(() => {
 
     let [h, m, s] = [0, 0, 0];
 
-    const updateTime = () => {
+    const updateRemoteTime = () => {
         fetch(`https://worldtimeapi.org/api/timezone/${timezone}`)
             .then(r => r.json())
             .then(d => {
@@ -48,7 +48,7 @@ onMounted(() => {
                 loaded.value = true;
             })
             .catch(() => {
-                updateTime();
+                updateRemoteTime();
             });
     };
 
@@ -242,11 +242,13 @@ onMounted(() => {
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
 
+        ctx.save();
+
         ctx.beginPath();
-        ctx.arc(offsetX + size, offsetY + size, size - 12, 0, Math.PI * 2);
+        ctx.arc(offsetX + size, offsetY + size, size - 20, 0, Math.PI * 2);
         ctx.clip();
 
-        ctx.translate(offsetX + size * 2.9, offsetY + size * 0.2);
+        ctx.translate(offsetX + size * 2.4, offsetY + size * 0.2);
         ctx.rotate((Math.PI * 2) / 2.3);
         ctx.fillStyle = (() => {
         const grd = ctx.createLinearGradient(0, 0, 0, size);
@@ -260,12 +262,14 @@ onMounted(() => {
         ctx.rect(0, 0, size * 4, 200);
         ctx.fill();
 
+        ctx.restore();
+
         ctx.resetTransform();
 
         requestAnimationFrame(() => draw(ctx));
     }
     
-    document.fonts.load('25px "Great Vibes"').then(updateTime);
+    document.fonts.load('25px "Great Vibes"').then(updateRemoteTime);
 
     const timeRegex = /.*T([0-9]{2}):([0-9]{2}):([0-9]{2})\..*/g;
 
@@ -281,7 +285,7 @@ onMounted(() => {
         }
     }, ONE_SECOND);
 
-    setInterval(() => updateTime(), ONE_MINUTE);
+    setInterval(() => updateRemoteTime(), ONE_MINUTE);
 });
 </script>
 
