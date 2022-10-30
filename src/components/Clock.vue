@@ -264,14 +264,8 @@ onMounted(() => {
 
         requestAnimationFrame(() => draw(ctx));
     }
-
-    const checkFontInterval = setInterval(() => {
-        if (document.fonts.check('20px Great Vibes')) {
-            updateTime();
-            clearInterval(checkFontInterval);
-        }
-    }, 100);
-
+    
+    document.fonts.load('25px "Great Vibes"').then(updateTime);
 
     const timeRegex = /.*T([0-9]{2}):([0-9]{2}):([0-9]{2})\..*/g;
 
@@ -323,20 +317,23 @@ onMounted(() => {
     top: 150px;
     width: 300px;
     text-align: center;
-    animation: loading 1s linear infinite;
+    animation: loading 600ms linear infinite;
     content: '';
     color: #fff;
 }
 
 @keyframes loading {
     0% {
-        content: '.Loading.';
+        content: '.LOading.';
+    }
+    33% {
+        content: '..LoAding..';
     }
     50% {
-        content: '..Loading..';
+        content: '...LoadIng...';
     }
     100% {
-        content: '...Loading...';
+        content: '..LoAding..';
     }
 }
 </style>
