@@ -111,7 +111,7 @@ onMounted(() => {
         ctx.shadowColor = 'transparent';
 
         ctx.strokeStyle = (() => {
-        const grd = ctx.createLinearGradient(0, 0, 0, size * 2);
+        const grd = ctx.createLinearGradient(0, 0, size, size * 2);
                 grd.addColorStop(0, '#111');
                 grd.addColorStop(0.4, '#333');
                 grd.addColorStop(0.9, '#777');
