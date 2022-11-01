@@ -20,6 +20,8 @@ const canvas = ref(null);
 
 let loaded = ref(false);
 
+let failed = ref(false);
+
 onMounted(() => {
     const ctx = canvas.value.getContext('2d');
 
@@ -31,10 +33,30 @@ onMounted(() => {
 
     let [h, m, s] = [0, 0, 0];
 
+    const showError = (ctx, msg = '') => {
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'rgba(255, 100, 100, 0.7)';
+        ctx.font = 'normal 30px "Great Vibes", sans-serif';
+        ctx.fillText('Error', offsetX + size, offsetY + size + size);
+        
+        ctx.fillStyle = 'rgba(100, 100, 100, 1)';
+        ctx.font = '16px "Syne Mono", monospace';
+        ctx.fillText(msg, offsetX + size, offsetY + size + size + 25);
+    };
+
     const updateRemoteTime = () => {
         fetch(`https://worldtimeapi.org/api/timezone/${timezone}`)
             .then(r => r.json())
             .then(d => {
+
+                if (d.error) {
+                    showError(ctx, 'Bad timezone name');
+                    loaded.value = true;
+                    failed.value = true;
+                    return;
+                }
+
                 const currentTime = d.datetime;
 
                 [h, m, s] = [
@@ -48,6 +70,9 @@ onMounted(() => {
                 loaded.value = true;
             })
             .catch(() => {
+                if (failed) {
+                    return;
+                }
                 updateRemoteTime();
             });
     };
@@ -113,7 +138,7 @@ onMounted(() => {
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
 
-        ctx.fillStyle = 'rgb(100, 100, 100, 0.5)';
+        ctx.fillStyle = 'rgba(100, 100, 100, 0.5)';
         ctx.font = 'normal 15px "Stick No Bills", sans-serif';
         ctx.fillText('Yinkar', offsetX + size, offsetY + size + size / 2.5);
 
@@ -279,8 +304,12 @@ onMounted(() => {
 
         requestAnimationFrame(() => draw(ctx));
     }
-    
-    document.fonts.load('25px "Great Vibes"').then(updateRemoteTime);
+
+    Promise.all([    
+        document.fonts.load('25px "Great Vibes"'),
+        document.fonts.load('15px "Stick No Bills"'),
+        document.fonts.load('18px "Syne Mono"'),
+    ]).then(updateRemoteTime);
 
     const timeRegex = /.*T([0-9]{2}):([0-9]{2}):([0-9]{2})\..*/g;
 
