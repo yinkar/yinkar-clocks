@@ -16,11 +16,10 @@ const {
 const width = ref(300);
 const height = ref(300);
 
+const loaded = ref(false);
+const failed = ref(false);
+
 const canvas = ref(null);
-
-let loaded = ref(false);
-
-let failed = ref(false);
 
 onMounted(() => {
     const ctx = canvas.value.getContext('2d');
@@ -361,7 +360,7 @@ onMounted(() => {
     top: 150px;
     width: 300px;
     text-align: center;
-    animation: loading 600ms linear infinite;
+    animation: loading 550ms linear infinite;
     content: '';
     color: #fff;
 }
@@ -370,14 +369,17 @@ onMounted(() => {
     0% {
         content: '.LOading.';
     }
-    33% {
+    25% {
         content: '..LoAding..';
     }
     50% {
         content: '...LoadIng...';
     }
-    100% {
+    75% {
         content: '..LoAding..';
+    }
+    100% {
+        content: '.LOading.';
     }
 }
 </style>
