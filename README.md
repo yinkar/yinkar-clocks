@@ -1,6 +1,6 @@
 # Yinkar Clocks
 
-Up to date world clocks.
+Clocks of every timezone of the world.
 
 ![Screenshot](screenshot.gif)
 
